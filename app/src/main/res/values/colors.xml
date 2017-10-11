@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#941E1E</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="garispilih">#DEF426</color>
+
+    <color name="colorTextPilih">#DEF426</color>
+    <color name="colorTextDisable">#000</color>
+
+
+</resources>
+
+

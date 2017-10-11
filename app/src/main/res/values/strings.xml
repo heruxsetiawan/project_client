@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Test</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_refresh">Refresh</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="url">http://192.168.0.110/solis/solis.php</string>
+
+
+    <string name="openDrawer">Drawer dibuka</string>
+    <string name="closeDrawer">Drawer ditutup</string>
+    <string name="navigation_view_item_1">Food</string>
+    <string name="navigation_view_item_2">Beer</string>
+    <string name="navigation_view_item_3">Daftar</string>
+    <string name="navigasi_kategori_2">Sub Item Navigasi</string>
+    <string name="navigation_view_item_4">Settings</string>
+    <string name="navigation_view_item_5">About</string>
+
+
+
+
+</resources>

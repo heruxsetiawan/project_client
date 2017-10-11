@@ -1,0 +1,34 @@
+<RelativeLayout android:id="@+id/layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="horizontal">
+
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+    <ImageView
+        android:id="@+id/imageViewTabItemAvatar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:icon="@drawable/tab_beer_selector"
+        android:layout_alignRight="@+id/textViewTabItemName"
+        android:layout_alignEnd="@+id/textViewTabItemName"
+        android:layout_alignLeft="@+id/textViewTabItemName"
+        android:layout_alignStart="@+id/textViewTabItemName"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/textViewTabItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/imageViewTabItemAvatar"
+        android:text="CUSTOM VIEW TAB" />
+
+</RelativeLayout>

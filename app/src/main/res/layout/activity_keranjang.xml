@@ -1,0 +1,234 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e7e7e7"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:titleTextColor="@android:color/white">
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvkeranjang2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_margin="1dp"
+        card_view:cardBackgroundColor="@color/background_material_light"
+        card_view:cardCornerRadius="6dp"
+        card_view:cardElevation="6dp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+            <View
+                android:id="@+id/view_tengah"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/tvpilihmeja"
+                android:layout_toLeftOf="@+id/view_tengah"
+                android:background="@drawable/bck_spinner"
+                android:padding="5dp">
+
+                <Spinner
+                    android:id="@+id/mySpinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:clickable="false" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tvnomormeja"
+                android:background="@drawable/bck_spinner"
+                android:padding="5dip"
+                >
+
+                <Spinner
+                    android:id="@+id/mySpinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                     android:layout_centerHorizontal="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:clickable="false" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tvpilihmeja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="20dp"
+                android:text="Pilih Meja"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvnomormeja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="12dp"
+                android:gravity="right"
+                android:text="Nomor Meja"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvkeranjang3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/total_"
+        android:layout_below="@+id/cvkeranjang2"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="1dp"
+        card_view:cardBackgroundColor="#e7e7e7"
+        card_view:cardCornerRadius="6dp"
+        card_view:cardElevation="6dp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#e7e7e7">
+
+                <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/rv_submenu_keranjang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="#e7e7e7"
+                    android:scrollbars="vertical" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/total_"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp">
+
+        <RelativeLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rl_total"
+            android:background="#e7e7e7"
+            android:padding="3dp">
+
+
+            <TextView
+                android:id="@+id/Total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total: Rp"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@id/Total"
+                android:gravity="right"
+                android:text="123456789"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:background="@drawable/btn_order"
+            >
+
+            <TextView
+                android:id="@+id/btn_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="Order"
+                android:textColor="#ffff"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>
