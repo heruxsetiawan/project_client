@@ -30,14 +30,14 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
     private final long REP_DELAY = 150;
     Context context3;
     private DataHelper myDb;
-    FragmentParent fragmentparent;
+    Pencarian fragmentparent;
 
     private Timer timer = new Timer();
     private final long DELAY = 900;
     String note;
 
 
-    Adapter_pencarian(Context context2, ArrayList<Data_Submenu> inputData, FragmentParent fp) {
+    Adapter_pencarian(Context context2, ArrayList<Data_Submenu> inputData, Pencarian fp) {
         rvsubmenu = inputData;
         context3 = context2;
         fragmentparent = fp;
@@ -126,7 +126,7 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
                 if (jumlah == 0) {
                     holder.txtCount.setText(hasil + "");
                     boolean isInserted2 = myDb.insertData(codemenu, namasubmenu, hasil + "", getnote, harga, total + "",fkitchen_id);
-                    //fragmentparent.getTotal();
+                    fragmentparent.getTotal();
                     holder.note.setVisibility(View.VISIBLE);
                   //  holder.rl1.setVisibility(View.VISIBLE);
                     holder.rladd.setVisibility(View.GONE);
@@ -147,10 +147,10 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
                 if (mAutoIncrement) {
                     increment();
                     repeatUpdateHandler.postDelayed(new RptUpdater(), REP_DELAY);
-                    //fragmentparent.getTotal();
+                    fragmentparent.getTotal();
                 } else if (mAutoDecrement) {
                     final Integer aa2 = Integer.valueOf(holder.txtCount.getText().toString());
-                   // fragmentparent.getTotal();
+                    fragmentparent.getTotal();
                     if (aa2 > 0) {
                         decrement();
                         repeatUpdateHandler.postDelayed(new RptUpdater(), REP_DELAY);
@@ -236,7 +236,7 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
                 if (jumlah == 0) {
                     holder.txtCount.setText(hasil + "");
                     boolean isInserted2 = myDb.insertData(codemenu, namasubmenu, hasil + "", getnote, harga, total + "",fkitchen_id);
-                //    fragmentparent.getTotal();
+                    fragmentparent.getTotal();
                     holder.note.setVisibility(View.VISIBLE);
 //                    holder.rl1.setVisibility(View.VISIBLE);
                     holder.rladd.setVisibility(View.GONE);
@@ -248,7 +248,7 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
                 } else {
                     holder.txtCount.setText(hasil + "");
                     boolean isUpdate = myDb.updateData(codemenu, namasubmenu, hasil + "", harga, total + "",fkitchen_id);
-//                    fragmentparent.getTotal();
+                    fragmentparent.getTotal();
                     holder.note.setVisibility(View.VISIBLE);
                   //  holder.rl1.setVisibility(View.VISIBLE);
                     holder.rladd.setVisibility(View.GONE);
@@ -314,7 +314,7 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
                 if (aa2 > 0) {
                     holder.txtCount.setText(hasil + "");
                     boolean isUpdate = myDb.updateData(codemenu, namasubmenu, hasil + "", harga, total + "",fkitchen_id);
-                //    fragmentparent.getTotal();
+                    fragmentparent.getTotal();
                     holder.note.setVisibility(View.VISIBLE);
                 //    holder.rl1.setVisibility(View.VISIBLE);
                     holder.rladd.setVisibility(View.GONE);
@@ -328,7 +328,7 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
                     if (aa3 == 0) {
                         Integer del_id = Integer.valueOf(codemenu);
                         myDb.deleteData(del_id);
-               //         fragmentparent.getTotal();
+                        fragmentparent.getTotal();
                         holder.note.setVisibility(View.GONE);
                      //   holder.rl1.setVisibility(View.GONE);
                      //   holder.rladd.setVisibility(View.VISIBLE);

@@ -47,14 +47,8 @@ public class Keranjang extends AppCompatActivity implements AdapterView.OnItemSe
     Context context;
     public RelativeLayout btnorder;
     public TextView total;
-    //public String url = BuildConfig.API + "solis.php";
-    // public String urlmain = BuildConfig.API + "main_menu_2.php";
-    // private static String url = "http://192.168.0.12/solis/solis.php";
-    // private static String solis_tes = "http://192.168.0.86/solis/main_menu_tes_android.php";
     private static String solis_tes = BuildConfig.Main_menu;
-    //private static String url2 = "http://192.168.0.86/solis/solis_order.php";
     private static String url_split = BuildConfig.Solis_order;
-    // private static String url_split = "http://192.168.0.86/solis/solis_order_tes_android.php";
     ArrayList<String> data_set_meja = new ArrayList<>();
     ArrayList<String> data_set_meja_filter = new ArrayList<>();
     RelativeLayout container, rl_total;
@@ -411,6 +405,7 @@ public class Keranjang extends AppCompatActivity implements AdapterView.OnItemSe
 
                 } catch (final JSONException e) {
                     Log.e("TAG", "Json parsing error parent: " + e.getMessage());
+                    Toast.makeText(Keranjang.this, "Gagal tidak terhubung ke server ", Toast.LENGTH_LONG).show();
                 }
 
                 setSpinner();

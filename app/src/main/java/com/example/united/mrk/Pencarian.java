@@ -15,10 +15,15 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.united.mrk.koneksi.RegisterUserClass;
@@ -27,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -37,10 +43,7 @@ import java.util.HashMap;
 public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnActionExpandListener {
     static final String ARG_PAGE = "ARG_PAGE";
     private int mPage;
-    // private String url = "http://192.168.0.12/solis/main_menu_2.php";
-    // private static String url = BuildConfig.API + "main_menu_2.php";
     private static String url = BuildConfig.Main_menu;
- //   private static String url = "http://192.168.0.86/solis/main_menu_tes_android.php";
     String id;
     private RecyclerView rvView;
     private ArrayList<Data_Submenu> dataList = new ArrayList<>();
@@ -62,6 +65,11 @@ public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnAct
     private String posisi, submenu;
     public static final String SUBMENU_PUTEXTRA = "submenu";
     private ProgressDialog pd = null;
+    LayoutInflater layoutInflater2;
+    private RelativeLayout get_total;
+    View addView2;
+    public TextView Rp, total;
+    ViewGroup container2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +80,7 @@ public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnAct
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         //fp = (FragmentParent) fm.findFragmentById(R.id.fragmentParent);
         setContentView(R.layout.activity_pencarian);
+        container2 = (RelativeLayout) findViewById(R.id.container_pencarian);
         rvView = (RecyclerView) findViewById(R.id.rv_pencarian);
         rvView.setHasFixedSize(true);
         layoutManager = new GridLayoutManager(context, 1);
@@ -81,197 +90,12 @@ public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnAct
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         all_menu();
-        // GetDataJsonfilter("pencarian");
-        //  GetDataJson_dial("menu", "stadion");
-
-        //fromtxt_filter();
+        getinflate();
+        getTotal();
 
         rvView.setItemViewCacheSize(dataList.size());
     }
 
-    public void fromtxt_filter() {
-
-        //dataList.clear();
-
-        try {
-
-            String s = CreateFileJson.getData(Pencarian.this, "all_menu");
-            JSONObject jsonObj = new JSONObject(s);
-            JSONArray contacts = jsonObj.getJSONArray("all_menu");
-            for (int i = 0; i < contacts.length(); i++) {
-                JSONObject c = contacts.getJSONObject(i);
-                JSONArray produk = c.getJSONArray("menu");
-                for (int y = 0; y < produk.length(); y++) {
-                    JSONObject detailProduk = produk.getJSONObject(y);
-                    String codesubmenu = detailProduk.getString("fcode");
-                    String namasubmenu = detailProduk.getString("nama");
-                    String hargamenu = detailProduk.getString("harga");
-                    Log.e("nama tes cari", namasubmenu);
-
-                           /* Data_Submenu_dial ds = new Data_Submenu_dial();
-                            ds.setcodemenu(codesubmenu);
-                            ds.setnamasubmenu(namasubmenu);
-                            ds.setharga(hargamenu);
-                            ds.setqty(myDb.getjumlah(codesubmenu));
-                            ds.setnote(myDb.getnote(codesubmenu));
-                            dataList_dial.add(ds);*/
-                  /*  Data_Submenu ds = new Data_Submenu();
-                    ds.setcodemenu(codesubmenu);
-                    ds.setnamasubmenu(namasubmenu);
-                    ds.setharga(hargamenu);
-                    ds.setqty(myDb.getjumlah(codesubmenu));
-                    ds.setnote(myDb.getnote(codesubmenu));
-                    dataList.add(ds);*/
-                }
-
-
-            }
-        /*    rvView.setItemViewCacheSize(dataList.size());
-            mAdapter = new Adapter_pencarian(context, dataList, fp);
-            rvView.setAdapter(mAdapter);*/
-        } catch (JSONException e) {
-            Log.e("JSONException detail", e.getMessage());
-        }
-    }
-
-
-    void GetDataJsonfilter(String kata) {
-        dataList.clear();
-
-        class a extends AsyncTask<String, Void, String> {
-            private RegisterUserClass ruc = new RegisterUserClass();
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                pDialog = new ProgressDialog(Pencarian.this);
-                pDialog.setMessage("Loading...");
-                pDialog.setCancelable(false);
-                pDialog.show();
-
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                try {
-                    JSONObject jsonObj = new JSONObject(s);
-                    JSONArray contacts = jsonObj.getJSONArray("all_menu");
-                    CreateFileJson.saveData(Pencarian.this, s, "all_menu");
-                    for (int i = 0; i < contacts.length(); i++) {
-                        JSONObject c = contacts.getJSONObject(i);
-                        JSONArray produk = c.getJSONArray("menu");
-                        for (int y = 0; y < produk.length(); y++) {
-                            JSONObject detailProduk = produk.getJSONObject(y);
-                            String codesubmenu = detailProduk.getString("fpkey");
-                            String namasubmenu = detailProduk.getString("nama");
-                            String hargamenu = detailProduk.getString("harga");
-
-                            Data_Submenu ds = new Data_Submenu();
-                            ds.setcodemenu(codesubmenu);
-                            ds.setnamasubmenu(namasubmenu);
-                            ds.setharga(hargamenu);
-                            ds.setqty(myDb.getjumlah(codesubmenu));
-                            ds.setnote(myDb.getnote(codesubmenu));
-                            dataList.add(ds);
-                        }
-
-
-                    }
-                } catch (final JSONException e) {
-                    Log.e("TAG", "Json parsing error parent: " + e.getMessage());
-                }
-
-
-            }
-
-            @Override
-            protected String doInBackground(String... params) {
-                Log.e("ket", "memproses parent");
-                HashMap<String, String> data = new HashMap<>();
-                data.put("operasi", params[0]);
-                return ruc.sendPostRequest(url, data, "POST");
-            }
-        }
-        a ru = new a();
-        ru.execute(kata);
-    }
-
-    void GetDataJson_dial(String kata, String cabang) {
-        dataList.clear();
-
-        class a extends AsyncTask<String, Void, String> {
-            private RegisterUserClass ruc = new RegisterUserClass();
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                pDialog = new ProgressDialog(Pencarian.this);
-                pDialog.setMessage("Loading...");
-                pDialog.setCancelable(false);
-                pDialog.show();
-
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-
-                try {
-                    JSONObject jsonObj = new JSONObject(s);
-                    JSONArray contacts = jsonObj.getJSONArray("all_menu");
-                    for (int i = 0; i < contacts.length(); i++) {
-                        JSONObject c = contacts.getJSONObject(i);
-                        JSONArray produk = c.getJSONArray("menu");
-                        for (int y = 0; y < produk.length(); y++) {
-                            JSONObject detailProduk = produk.getJSONObject(y);
-                            String codesubmenu = detailProduk.getString("fpkey");
-                            String namasubmenu = detailProduk.getString("nama");
-                            String hargamenu = detailProduk.getString("harga");
-
-                           /* Data_Submenu_dial ds = new Data_Submenu_dial();
-                            ds.setcodemenu(codesubmenu);
-                            ds.setnamasubmenu(namasubmenu);
-                            ds.setharga(hargamenu);
-                            ds.setqty(myDb.getjumlah(codesubmenu));
-                            ds.setnote(myDb.getnote(codesubmenu));
-                            dataList_dial.add(ds);*/
-                            Data_Submenu ds = new Data_Submenu();
-                            ds.setcodemenu(codesubmenu);
-                            ds.setnamasubmenu(namasubmenu);
-                            ds.setharga(hargamenu);
-                            ds.setqty(myDb.getjumlah(codesubmenu));
-                            ds.setnote(myDb.getnote(codesubmenu));
-                            dataList.add(ds);
-                        }
-
-
-                    }
-                    rvView.setItemViewCacheSize(dataList.size());
-                    mAdapter = new Adapter_pencarian(context, dataList, fp);
-                    rvView.setAdapter(mAdapter);
-                    pDialog.dismiss();
-                } catch (final JSONException e) {
-                    Log.e("TAG", "Json parsing error parent: " + e.getMessage());
-                    Toast.makeText(Pencarian.this, "Tidak Dapat Terhubung ke Server ", Toast.LENGTH_LONG).show();
-                    pDialog.dismiss();
-                }
-
-
-            }
-
-            @Override
-            protected String doInBackground(String... params) {
-                Log.e("ket", "memproses parent");
-                HashMap<String, String> data = new HashMap<>();
-                data.put("operasi", params[0]);
-                data.put("cabang", params[1]);
-                return ruc.sendPostRequest(url, data, "POST");
-            }
-        }
-        a ru = new a();
-        ru.execute(kata, cabang);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -351,9 +175,6 @@ public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnAct
         return true;
     }
 
-    public void setArguments(Bundle bundle) {
-
-    }
 
     class Pindah_Home extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
@@ -384,9 +205,9 @@ public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnAct
     public void all_menu() {
 
         dataList.clear();
-        Log.e("lokal","jalan");
+        Log.e("lokal", "jalan");
         try {
-            String s = CreateFileJson.getData(Pencarian.this, "all_menu");
+            String s = CreateFileJson.getData(Pencarian.this, "menu");
             JSONObject jsonObj = new JSONObject(s);
             JSONArray contacts = jsonObj.getJSONArray("all_menu");
 
@@ -401,11 +222,10 @@ public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnAct
                     String harga = detailProduk.getString("harga");
                     String fkitchen_id = detailProduk.getString("fkitchen_id");
                     Data_Submenu ds = new Data_Submenu();
-                    Log.e("nama",nama);
                     ds.setcodemenu(fpkey);
                     ds.setnamasubmenu(nama);
                     ds.setharga(harga);
-                  //  ds.setfkitchen_id(fkitchen_id);
+                    ds.setfkitchen_id(fkitchen_id);
                     ds.setqty(myDb.getjumlah(fpkey));
                     ds.setnote(myDb.getnote(fpkey));
                     dataList.add(ds);
@@ -415,11 +235,60 @@ public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnAct
 
             }
             rvView.setItemViewCacheSize(dataList.size());
-            mAdapter = new Adapter_pencarian(context, dataList, fp);
+            mAdapter = new Adapter_pencarian(context, dataList, Pencarian.this);
             rvView.setAdapter(mAdapter);
         } catch (JSONException e) {
             Log.e("JSONException detail", e.getMessage());
         }
+    }
+
+    public void getinflate() {
+        layoutInflater2 = (LayoutInflater) Pencarian.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        addView2 = layoutInflater2.inflate(R.layout.inflate_total, null);
+        Rp = (TextView) addView2.findViewById(R.id.rp);
+        total = (TextView) addView2.findViewById(R.id.total);
+        container2.addView(addView2);
+        get_total = (RelativeLayout) addView2.findViewById(R.id.rl_total);
+
+        get_total.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Pencarian.this, Keranjang.class);
+                startActivity(intent);
+                Pencarian.this.finish();
+            }
+        });
+
+    }
+
+    public void getTotal() {
+        if (myDb.getTotal() == null) {
+            Rp.setText("0");
+            // hideinflate();
+        } else if (myDb.getTotal().equalsIgnoreCase("0")) {
+            Rp.setText("0");
+            // hideinflate();
+        } else {
+            try {
+                //    showinflate();
+                String value = myDb.getTotal();
+                value = value.replace(".", "").replace(",", "");
+                double amount = Double.parseDouble(value);
+                DecimalFormat formatter = null;
+
+                if (value != null && !value.equals("")) {
+                    formatter = new DecimalFormat("#,###");
+                }
+                if (!value.equals(""))
+                    Rp.setText(formatter.format(amount));
+
+                return;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
+
     }
 
 }

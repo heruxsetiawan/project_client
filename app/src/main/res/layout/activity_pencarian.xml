@@ -23,8 +23,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
+        android:layout_above="@+id/container_pencarian"
         xmlns:android="http://schemas.android.com/apk/res/android" />
 
 
+    <RelativeLayout
+        android:id="@+id/container_pencarian"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+    </RelativeLayout>
 </RelativeLayout>
 

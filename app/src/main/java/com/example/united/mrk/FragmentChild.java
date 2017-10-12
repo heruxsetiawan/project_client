@@ -38,9 +38,6 @@ import java.util.ArrayList;
 public class FragmentChild extends Fragment implements MenuItemCompat.OnActionExpandListener {
     static final String ARG_PAGE = "ARG_PAGE";
     private int mPage;
-  //  private String url = "http://192.168.0.12/solis/solis.php";
-  //  private static String url = BuildConfig.API + "main_menu_2.php";
-  //  private static String url = "http://192.168.0.86/solis/main_menu_tes_android.php";
     String id;
     private RecyclerView rvView;
     private ArrayList<Data_Submenu> dataList = new ArrayList<>();
@@ -48,7 +45,6 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
     private Adapter_Child mAdapter;
     Context context;
     private SearchView.OnQueryTextListener queryTextListener;
-    DataHelper myDb;
     boolean cari = true;
     FragmentParent fp;
     FragmentChild fragmentchild;
@@ -62,7 +58,7 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
     private String posisi, submenu;
     public static final String SUBMENU_PUTEXTRA = "submenu";
     ProgressDialog progress;
-
+    public DataHelper myDb;
     public FragmentChild() {
     }
 
@@ -102,16 +98,15 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
         rvView = (RecyclerView) view.findViewById(R.id.rv_submenu);
         tabLayout = (TabLayout) view.findViewById(R.id.my_tab_layout);
         viewPager = (ViewPager) view.findViewById(R.id.my_viewpager);
-
         rvView.setHasFixedSize(true);
         layoutManager = new GridLayoutManager(context, 1);
         rvView.setLayoutManager(layoutManager);
         dataList = new ArrayList<Data_Submenu>();
         myDb = new DataHelper(getActivity());
         fromtxt_filter(submenu);
-
         setHasOptionsMenu(true);
         rvView.setItemViewCacheSize(dataList.size());
+
         return view;
     }
 
@@ -127,67 +122,12 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
         if (savedInstanceState != null)
             listState = savedInstanceState.getParcelable(LIST_STATE_KEY);
     }
-    /*@Override
-    public void onResume() {
-        super.onResume();
-        if (listState != null) {
-            layoutManager.onRestoreInstanceState(listState);
-        }
-        Refresh();
-        fp.getTotal();
-        new Runnable() {
-            @Override
-            public void run() {
-                Refresh();
-                fp.getTotal();
 
-            }
-        };
-    }*/
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_home, menu);
-       /* MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = null;
-        if (searchItem != null) {
-            searchView = (SearchView) searchItem.getActionView();
-            MenuItemCompat.setOnActionExpandListener(searchItem, this);
-        }
-        if (searchView != null) {
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-
-
-            queryTextListener = new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    final ArrayList<Data_Submenu> filteredModelList = filter(dataList, newText);
-                    if (filteredModelList.size() > 0) {
-                        if (newText.length() > 0) {
-                            cari = false;
-                            mAdapter.setFilter(filteredModelList);
-                        } else {
-                            cari = true;
-
-                        }
-                    }
-                    Intent intent = new Intent(getActivity(), Pencarian.class);
-                    startActivity(intent);
-                  //  getActivity().finish();
-                    return false;
-                }
-            };
-            searchView.setOnQueryTextListener(queryTextListener);
-        }*/
-
     }
 
 
@@ -260,10 +200,7 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
                 return true;
             case R.id.action_refresh:
                 showDialog();
-               /* Intent intent = new Intent();
-                intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-                intent.setAction("com.wirasetiawan.BroadcastReceiver");
-                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);*/
+
                 return true;
             case R.id.action_delete:
                 Cursor res2 = myDb.getAllData();
@@ -284,35 +221,6 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
 
 
                 return true;
-
-            //  Refresh();
-               /* Getfromjson("menu", id);
-                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 1);
-                rvView.setLayoutManager(layoutManager);
-                dataList = new ArrayList<>();
-                rvView.setItemViewCacheSize(dataList.size());*/
-
-                 /* case R.id.action_delete_database:
-                myDb.delete_tabel_database();
-                Refresh();
-                fp.getTotal();
-                return true;
-                  case R.id.action_delete:
-                myDb.deleteAll();
-                fp.getTotal();
-                Refresh();
-                return true;
-            case R.id.action_keranjang_test:
-                Cursor res2 = myDb.getAllData();
-                if (res2.getCount() == 0) {
-                    showMessage("Data Kosong", "Nothing found");
-                    return true;
-                } else {
-                    Intent intent = new Intent(getActivity(), Keranjang.class);
-                    startActivity(intent);
-                }
-                return true;*/
-
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -387,7 +295,7 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
             //letak dimana progress berjalan
             //biasanya koneksi ke server maupun proses yang membutuhkan waktu
 
-            fp.GetDataJsonfilter("menu", "stadion");
+            fp.getserver("menu", "stadion");
 
 
             return null;

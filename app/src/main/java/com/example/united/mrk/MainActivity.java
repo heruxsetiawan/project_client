@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getIDs();
-        //tes12345678910
+
         String menuJson = CreateFileJson.getData(getApplicationContext(), "menu");
         if (menuJson == null) {
             fragmentParent.GetDataJsonfilter("menu", "stadion");
@@ -45,70 +45,6 @@ public class MainActivity extends AppCompatActivity  {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_tes);
         setSupportActionBar(toolbar);
-        // navigationView = (NavigationView) findViewById(R.id.navigation_view);
-       /* navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                //Memeriksa apakah item tersebut dalam keadaan dicek  atau tidak,
-                if (menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
-                //Menutup  drawer item klik
-
-
-                drawerLayout.closeDrawers();
-                switch (menuItem.getItemId()) {
-                    case R.id.navigation1:
-                        fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(),"menu"), "2");
-                        return true;
-                    case R.id.navigation2:
-                        fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(),"menu"), "11");
-                        return true;
-                    case R.id.navigation3:
-                        fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(),"menu"), "6");
-                        return true;
-                    case R.id.navigation4:
-                        fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(),"menu"), "13");
-                        return true;
-                    case R.id.navigation5:
-                        fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(),"menu"), "10");
-                        return true;
-                    case R.id.navigation6:
-                        fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(),"menu"), "4");
-                        return true;
-                    case R.id.navigation7:
-                        fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(),"menu"), "7");
-                        return true;
-                    case R.id.navigation8:
-                        fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(),"menu"), "8");
-                        return true;
-                    default:
-                        Toast.makeText(getApplicationContext(), "Kesalahan Terjadi ", Toast.LENGTH_SHORT).show();
-                        return true;
-                }
-            }
-
-        });
-*/
-
-       /* drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                // Kode di sini akan merespons setelah drawer menutup disini kita biarkan kosong
-                super.onDrawerClosed(drawerView);
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                //  Kode di sini akan merespons setelah drawer terbuka disini kita biarkan kosong
-                super.onDrawerOpened(drawerView);
-            }
-        };
-        //Mensetting actionbarToggle untuk drawer layout
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-        //memanggil synstate
-        actionBarDrawerToggle.syncState();*/
 
     }
 

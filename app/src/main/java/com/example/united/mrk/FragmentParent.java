@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,6 +33,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.united.mrk.koneksi.RegisterUserClass;
 
@@ -52,7 +55,7 @@ public class FragmentParent extends Fragment {
     int selectedTabPosition;
     //  public String url = BuildConfig.API + "main_menu_2.php";
     private static String url2 = BuildConfig.Main_menu;
-   // private static String url = "http://192.168.0.86/solis/main_menu_tes_android.php";
+    // private static String url = "http://192.168.0.86/solis/main_menu_tes_android.php";
     public TextView Rp, total;
     public DataHelper myDb;
     private ArrayList<Data_Category_menu> dataList;
@@ -60,6 +63,7 @@ public class FragmentParent extends Fragment {
     LayoutInflater layoutInflater2;
     private RelativeLayout get_total;
     View addView2;
+    public String jumlah_data;
     public ProgressDialog pDialog2;
 
 
@@ -79,7 +83,8 @@ public class FragmentParent extends Fragment {
         setRetainInstance(true);
         getinflate();
         getTotal();
-        all_menu("menu","stadion");
+
+        //all_menu("menu","stadion");
         return view;
     }
 
@@ -88,6 +93,8 @@ public class FragmentParent extends Fragment {
         layoutInflater2 = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         addView2 = layoutInflater2.inflate(R.layout.inflate_total, null);
         Rp = (TextView) addView2.findViewById(R.id.rp);
+
+
         total = (TextView) addView2.findViewById(R.id.total);
         container2.addView(addView2);
         get_total = (RelativeLayout) addView2.findViewById(R.id.rl_total);
@@ -104,6 +111,8 @@ public class FragmentParent extends Fragment {
     }
 
     public void getTotal() {
+
+
         if (myDb.getTotal() == null) {
             Rp.setText("0");
             hideinflate();
@@ -218,6 +227,7 @@ public class FragmentParent extends Fragment {
         adapter.mFragmentList.clear();
         adapter.notifyDataSetChanged();
         Log.e("data from txt parent", "jalan");
+
         if (menu != null) {
 
             try {
@@ -242,25 +252,20 @@ public class FragmentParent extends Fragment {
 
     }
 
-    void create(FragmentActivity activity, String mJsonResponse, String fileName) {
-        CreateFileJson.saveData(getActivity(), mJsonResponse, fileName);
-    }
-
 
     void GetDataJsonfilter(String kata, String cabang) {
         dataList.clear();
-       /* adapter.mFragmentTitleList.clear();
-        adapter.mFragmentList.clear();
-        adapter.notifyDataSetChanged();*/
         class a extends AsyncTask<String, Void, String> {
             private RegisterUserClass ruc = new RegisterUserClass();
 
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-              /*  pDialog2 = new ProgressDialog(getActivity());
+                pDialog2 = new ProgressDialog(getContext());
                 pDialog2.setMessage("Loading...");
-                pDialog2.setCancelable(false);*/
+                pDialog2.setCancelable(false);
+                pDialog2.show();
+
             }
 
             @Override
@@ -283,12 +288,70 @@ public class FragmentParent extends Fragment {
 
                 } catch (final JSONException e) {
                     Log.e("TAG", "Json parsing error parent: " + e.getMessage());
+                    //Toast.makeText(getContext(), "Gagal tidak terhubung ke server ", Toast.LENGTH_LONG).show();
+                    pDialog2.dismiss();
+                    showdialogerror();
                 }
 
 
                 addPage();
                 viewPager.setCurrentItem(0);
-            //    pDialog2.dismiss();
+                pDialog2.dismiss();
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                Log.e("ket", "memproses parent");
+                HashMap<String, String> data = new HashMap<>();
+                data.put("operasi", params[0]);
+                data.put("cabang", params[1]);
+
+                return ruc.sendPostRequest(url2, data, "POST");
+            }
+        }
+        a ru = new a();
+        ru.execute(kata, cabang);
+    }
+    void getserver(String kata, String cabang) {
+        dataList.clear();
+        class a extends AsyncTask<String, Void, String> {
+            private RegisterUserClass ruc = new RegisterUserClass();
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+
+
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+
+                try {
+                    JSONObject jsonObj = new JSONObject(s);
+                    JSONArray contacts = jsonObj.getJSONArray("data");
+                    CreateFileJson.saveData(getActivity(), s, "menu");
+                    for (int i = 0; i < contacts.length(); i++) {
+                        JSONObject c = contacts.getJSONObject(i);
+                        String namasubmenu = c.getString("category");
+                        Data_Category_menu ds = new Data_Category_menu();
+                        ds.setnama_category(namasubmenu);
+                        dataList.add(ds);
+
+
+                    }
+
+                } catch (final JSONException e) {
+                    Log.e("TAG", "Json parsing error parent: " + e.getMessage());
+                    //Toast.makeText(getContext(), "Gagal tidak terhubung ke server ", Toast.LENGTH_LONG).show();
+
+                    showdialogerror();
+                }
+
+
+                addPage();
+
 
             }
 
@@ -298,14 +361,16 @@ public class FragmentParent extends Fragment {
                 HashMap<String, String> data = new HashMap<>();
                 data.put("operasi", params[0]);
                 data.put("cabang", params[1]);
+                pDialog2.dismiss();
                 return ruc.sendPostRequest(url2, data, "POST");
             }
         }
         a ru = new a();
         ru.execute(kata, cabang);
     }
+
     void all_menu(String kata, String cabang) {
-        Log.e("allmenu","jalan");
+        Log.e("allmenu", "jalan");
 
         class a extends AsyncTask<String, Void, String> {
             private RegisterUserClass ruc = new RegisterUserClass();
@@ -332,7 +397,6 @@ public class FragmentParent extends Fragment {
 
 
                         }*/
-
 
 
                     }
@@ -371,5 +435,42 @@ public class FragmentParent extends Fragment {
         }
     };
 
+    private void showdialogerror() {
+        String title = "Tidak Terhubung Ke Server", message = "Hubungkan Ke Server";
+
+
+        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(getContext());
+        alertDialogBuilder.setTitle("tes 123");
+        alertDialogBuilder.setTitle(title);
+        alertDialogBuilder
+                // .setMessage("Apakah anda akan menambah pesanan?")
+                .setMessage(message)
+                .setIcon(R.drawable.mrk)
+                .setCancelable(false)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                  restart();
+
+
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+
+        alertDialog.show();
+    }
+
+    void restart() {
+        Intent i = getActivity().getPackageManager().
+                getLaunchIntentForPackage(getActivity().getPackageName());
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
 
 }

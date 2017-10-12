@@ -14,15 +14,16 @@
             android:id="@+id/atas"
             android:layout_width="match_parent"
             android:layout_height="35dp"
+            android:layout_centerHorizontal="true"
             android:background="#e7e7e7">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
                 android:clickable="false"
-                android:padding="2dp">
+                android:padding="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true">
 
                 <TextView
                     android:id="@+id/total"
@@ -33,6 +34,7 @@
                     android:textStyle="bold"
                     android:textColor="#000"
                     android:textSize="24dp" />
+
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/appCompatImageView"
@@ -50,7 +52,8 @@
             android:background="@drawable/btn_to_keranjang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/atas">
+            android:layout_below="@+id/atas"
+            android:id="@+id/relativeLayout">
 
 
             <TextView
