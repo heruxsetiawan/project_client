@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/navigation1"
+            android:checked="false"
+            android:title="@string/navigation_view_item_1" />
+        <item
+            android:id="@+id/navigation2"
+            android:checked="false"
+            android:title="Beverages Mr.K" />
+        <item
+            android:id="@+id/navigation3"
+            android:checked="false"
+            android:title="Beer" />
+        <item
+            android:id="@+id/navigation4"
+            android:checked="false"
+            android:title="Beverages TTH" />
+        <item
+            android:id="@+id/navigation5"
+            android:checked="false"
+            android:title="Snack" />
+        <item
+            android:id="@+id/navigation6"
+            android:checked="false"
+            android:title="Paket" />
+        <item
+            android:id="@+id/navigation7"
+            android:checked="false"
+            android:title="Rokok" />
+        <item
+            android:id="@+id/navigation8"
+            android:checked="false"
+            android:title="Merchandise" />
+
+
+
+    </group>
+
+
+
+
+</menu>
