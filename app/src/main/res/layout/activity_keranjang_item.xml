@@ -154,11 +154,10 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/tv_harga_keranjang"
                 android:layout_marginTop="5dp"
-
                 android:background="#000" />
             <EditText
                 android:id="@+id/add_note"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -168,7 +167,7 @@
                 android:maxLines="4"
                 android:textSize="15dp"
 
-                android:layout_below="@+id/relativeLayout2"
+                android:layout_below="@+id/view1"
                 android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
