@@ -88,9 +88,10 @@ public class Keranjang extends AppCompatActivity implements AdapterView.OnItemSe
         String menuJson = CreateFileJson.getData(getApplicationContext(), "meja");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        jsonmeja("meja");
         Getfromdata();
         getjumlahdata();
-        jsonmeja("meja");
+
         rvView.setItemViewCacheSize(dataList.size());
         getTotal();
 
@@ -404,11 +405,13 @@ public class Keranjang extends AppCompatActivity implements AdapterView.OnItemSe
                     }
 
                 } catch (final JSONException e) {
-                    Log.e("TAG", "Json parsing error parent: " + e.getMessage());
-                    Toast.makeText(Keranjang.this, "Gagal tidak terhubung ke server ", Toast.LENGTH_LONG).show();
+                    Log.e("TAG", "Json meja parsing error: " + e.getMessage());
+                  //  Toast.makeText(Keranjang.this, "Gagal tidak terhubung ke server ", Toast.LENGTH_LONG).show();
+                    jsonmeja("meja");
                 }
 
                 setSpinner();
+
 
 
             }
@@ -458,6 +461,7 @@ public class Keranjang extends AppCompatActivity implements AdapterView.OnItemSe
                                 dk.setftablekey(ftablekey);
                                 dk.setftype(ftype);
                                 dataList_meja.add(dk);
+                                Log.e("nomor meja",fname);
                                 //  data_set_meja_filter.add(fname);
 
 
@@ -470,6 +474,7 @@ public class Keranjang extends AppCompatActivity implements AdapterView.OnItemSe
 
                 } catch (final JSONException e) {
                     Log.e("TAG", "jsonmeja_filter: " + e.getMessage());
+
                 }
                 setSpinner2();
 
