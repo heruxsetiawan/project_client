@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity  {
             fragmentParent.GetDataJsonfilter("menu", "stadion");
             // fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(),"menu"));
         } else {
+            //fragmentParent.GetDataJsonfilter("menu", "stadion");
             fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(), "menu"));
         }
 

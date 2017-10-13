@@ -288,9 +288,7 @@ public class FragmentParent extends Fragment {
 
                 } catch (final JSONException e) {
                     Log.e("TAG", "Json parsing error parent: " + e.getMessage());
-                    //Toast.makeText(getContext(), "Gagal tidak terhubung ke server ", Toast.LENGTH_LONG).show();
-                    pDialog2.dismiss();
-                    showdialogerror();
+                    GetDataJsonfilter("menu","stadion");
                 }
 
 
@@ -346,7 +344,7 @@ public class FragmentParent extends Fragment {
                     Log.e("TAG", "Json parsing error parent: " + e.getMessage());
                     //Toast.makeText(getContext(), "Gagal tidak terhubung ke server ", Toast.LENGTH_LONG).show();
 
-                    showdialogerror();
+                   getserver("menu","stadion");
                 }
 
 
@@ -435,42 +433,6 @@ public class FragmentParent extends Fragment {
         }
     };
 
-    private void showdialogerror() {
-        String title = "Tidak Terhubung Ke Server", message = "Hubungkan Ke Server";
 
-
-        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(getContext());
-        alertDialogBuilder.setTitle("tes 123");
-        alertDialogBuilder.setTitle(title);
-        alertDialogBuilder
-                // .setMessage("Apakah anda akan menambah pesanan?")
-                .setMessage(message)
-                .setIcon(R.drawable.mrk)
-                .setCancelable(false)
-                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                  restart();
-
-
-                    }
-                })
-                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
-
-        alertDialog.show();
-    }
-
-    void restart() {
-        Intent i = getActivity().getPackageManager().
-                getLaunchIntentForPackage(getActivity().getPackageName());
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(i);
-    }
 
 }
