@@ -1,37 +1,23 @@
 package com.example.united.mrk;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +41,7 @@ public class FragmentParent extends Fragment {
     int selectedTabPosition;
     //  public String url = BuildConfig.API + "main_menu_2.php";
     private static String url2 = BuildConfig.Main_menu;
+    private static String url = BuildConfig.Main_menu_2;
     // private static String url = "http://192.168.0.86/solis/main_menu_tes_android.php";
     public TextView Rp, total;
     public DataHelper myDb;
@@ -255,46 +242,55 @@ public class FragmentParent extends Fragment {
 
     void GetDataJsonfilter(String kata, String cabang) {
         dataList.clear();
+        pDialog2 = new ProgressDialog(getContext());
+        pDialog2.setMessage("Loading...");
+        pDialog2.setCancelable(false);
+        pDialog2.show();
+
         class a extends AsyncTask<String, Void, String> {
             private RegisterUserClass ruc = new RegisterUserClass();
 
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                pDialog2 = new ProgressDialog(getContext());
-                pDialog2.setMessage("Loading...");
-                pDialog2.setCancelable(false);
-                pDialog2.show();
+
 
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
+                Log.e("s",s);
+                if (s.equalsIgnoreCase("gagal_total")) {
+                    Toast.makeText(getContext(), "Pindah Koneksi", Toast.LENGTH_SHORT).show();
+                    getserver_backup("menu", "stadion");
 
-                try {
-                    JSONObject jsonObj = new JSONObject(s);
-                    JSONArray contacts = jsonObj.getJSONArray("data");
-                    CreateFileJson.saveData(getActivity(), s, "menu");
-                    for (int i = 0; i < contacts.length(); i++) {
-                        JSONObject c = contacts.getJSONObject(i);
-                        String namasubmenu = c.getString("category");
-                        Data_Category_menu ds = new Data_Category_menu();
-                        ds.setnama_category(namasubmenu);
-                        dataList.add(ds);
+                } else {
+                    try {
+                        JSONObject jsonObj = new JSONObject(s);
+                        JSONArray contacts = jsonObj.getJSONArray("data");
+                        CreateFileJson.saveData(getActivity(), s, "menu");
+                        for (int i = 0; i < contacts.length(); i++) {
+                            JSONObject c = contacts.getJSONObject(i);
+                            String namasubmenu = c.getString("category");
+                            Data_Category_menu ds = new Data_Category_menu();
+                            ds.setnama_category(namasubmenu);
+                            dataList.add(ds);
 
 
+                        }
+
+                    } catch (final JSONException e) {
+                        Log.e("TAG", "Json pertama error : " + e.getMessage());
+                        //  GetDataJsonfilter("menu", "stadion");
+                        // showDialog_error();
                     }
 
-                } catch (final JSONException e) {
-                    Log.e("TAG", "Json parsing error parent: " + e.getMessage());
-                    GetDataJsonfilter("menu","stadion");
                 }
-
-
                 addPage();
                 viewPager.setCurrentItem(0);
                 pDialog2.dismiss();
+
             }
 
             @Override
@@ -310,6 +306,7 @@ public class FragmentParent extends Fragment {
         a ru = new a();
         ru.execute(kata, cabang);
     }
+
     void getserver(String kata, String cabang) {
         dataList.clear();
         class a extends AsyncTask<String, Void, String> {
@@ -329,7 +326,6 @@ public class FragmentParent extends Fragment {
                 try {
                     JSONObject jsonObj = new JSONObject(s);
                     JSONArray contacts = jsonObj.getJSONArray("data");
-                    CreateFileJson.saveData(getActivity(), s, "menu");
                     for (int i = 0; i < contacts.length(); i++) {
                         JSONObject c = contacts.getJSONObject(i);
                         String namasubmenu = c.getString("category");
@@ -339,28 +335,27 @@ public class FragmentParent extends Fragment {
 
 
                     }
-
+                    CreateFileJson.saveData(getActivity(), s, "menu");
                 } catch (final JSONException e) {
-                    Log.e("TAG", "Json parsing error parent: " + e.getMessage());
-                    //Toast.makeText(getContext(), "Gagal tidak terhubung ke server ", Toast.LENGTH_LONG).show();
-
-                   getserver("menu","stadion");
+                    Log.e("TAG", "Json server sebenarnya salah : " + e.getMessage());
+                    //  GetDataJsonfilter("menu", "stadion");
+                    showDialog_error();
                 }
 
 
                 addPage();
-
+                viewPager.setCurrentItem(0);
 
             }
 
             @Override
             protected String doInBackground(String... params) {
-                Log.e("ket", "memproses parent");
+                Log.e("ket", "memproses server sebenaranya");
                 HashMap<String, String> data = new HashMap<>();
                 data.put("operasi", params[0]);
                 data.put("cabang", params[1]);
-                pDialog2.dismiss();
-                return ruc.sendPostRequest(url2, data, "POST");
+
+                return ruc.sendPostRequest(url, data, "POST");
             }
         }
         a ru = new a();
@@ -433,6 +428,94 @@ public class FragmentParent extends Fragment {
         }
     };
 
+
+    private void showDialog_error() {
+        String title = null, message = null;
+
+
+        title = "Aplikasi Tidak Terhubung ke Server";
+        message = "Coba Lagi Hubungkan ke Server ?";
+
+        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(getContext());
+
+        alertDialogBuilder.setTitle(title);
+        alertDialogBuilder
+                .setMessage(message)
+                .setIcon(R.drawable.mrk)
+                .setCancelable(false)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // GetDataJsonfilter("menu", "stadion");
+                        getserver_backup("menu", "stadion");
+
+
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+
+        alertDialog.show();
+    }
+
+    void getserver_backup(String kata, String cabang) {
+        dataList.clear();
+        class a extends AsyncTask<String, Void, String> {
+            private RegisterUserClass ruc = new RegisterUserClass();
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+
+
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+
+                try {
+                    JSONObject jsonObj = new JSONObject(s);
+                    JSONArray contacts = jsonObj.getJSONArray("data");
+                    for (int i = 0; i < contacts.length(); i++) {
+                        JSONObject c = contacts.getJSONObject(i);
+                        String namasubmenu = c.getString("category");
+                        Data_Category_menu ds = new Data_Category_menu();
+                        ds.setnama_category(namasubmenu);
+                        dataList.add(ds);
+
+
+                    }
+                    CreateFileJson.saveData(getActivity(), s, "menu");
+                } catch (final JSONException e) {
+                    Log.e("TAG", "Json server sebenarnya salah : " + e.getMessage());
+                    //  GetDataJsonfilter("menu", "stadion");
+                    showDialog_error();
+                }
+
+
+                addPage();
+                viewPager.setCurrentItem(0);
+                pDialog2.dismiss();
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                Log.e("ket", "memproses server sebenaranya");
+                HashMap<String, String> data = new HashMap<>();
+                data.put("operasi", params[0]);
+                data.put("cabang", params[1]);
+                pDialog2.dismiss();
+                return ruc.sendPostRequest(url, data, "POST");
+            }
+        }
+        a ru = new a();
+        ru.execute(kata, cabang);
+    }
 
 
 }

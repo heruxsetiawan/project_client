@@ -28,7 +28,8 @@ public class RegisterUserClass {
             URL url = new URL(requestURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(30000);
-            conn.setConnectTimeout(20000);
+          //  conn.setConnectTimeout(20000);
+            conn.setConnectTimeout(10000);
             conn.setRequestMethod(metod);
             conn.setDoInput(true);
             conn.setDoOutput(true);
@@ -46,11 +47,16 @@ public class RegisterUserClass {
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 response = br.readLine();
             } else {
+                //mati
+              //  response = responseCode+"";
                 response = responseCode+"";
+
                 Log.e("HTTP NOT OKE", "Tidak dapat melanjutkan"+responseCode);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            //tidak di temukan
+            response="gagal_total";
         }
         return response;
     }

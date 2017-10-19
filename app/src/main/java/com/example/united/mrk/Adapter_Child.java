@@ -1,5 +1,6 @@
 package com.example.united.mrk;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v7.widget.CardView;
@@ -16,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -28,7 +31,7 @@ public class Adapter_Child extends RecyclerView.Adapter<Adapter_Child.ViewHolder
     private boolean mAutoIncrement = false;
     private boolean mAutoDecrement = false;
     private final long REP_DELAY = 150;
-    Context context3;
+    private Activity kontek;
     private DataHelper myDb;
     FragmentParent fragmentparent;
 
@@ -37,9 +40,9 @@ public class Adapter_Child extends RecyclerView.Adapter<Adapter_Child.ViewHolder
     String note;
 
 
-    Adapter_Child(Context context2, ArrayList<Data_Submenu> inputData, FragmentParent fp) {
+    Adapter_Child(Activity context2, ArrayList<Data_Submenu> inputData, FragmentParent fp) {
         rvsubmenu = inputData;
-        context3 = context2;
+        kontek = context2;
         fragmentparent = fp;
     }
 
@@ -104,6 +107,9 @@ public class Adapter_Child extends RecyclerView.Adapter<Adapter_Child.ViewHolder
 
 
 
+        Picasso.with(kontek)
+                .load(ds.getImg())
+                .into(holder.img_submenu);
 
         final Integer jumlah = Integer.valueOf(holder.txtCount.getText().toString());
         if(jumlah==0){

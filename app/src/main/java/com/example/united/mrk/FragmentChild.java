@@ -367,6 +367,8 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
                         String namasubmenu = detailProduk.getString("nama");
                         String hargamenu = detailProduk.getString("harga");
                         String fkitchen_id = detailProduk.getString("fkitchen_id");
+                        String img = detailProduk.getString("img");
+
 
                         Data_Submenu ds = new Data_Submenu();
                         ds.setcodemenu(codesubmenu);
@@ -375,13 +377,14 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
                         ds.setqty(myDb.getjumlah(codesubmenu));
                         ds.setnote(myDb.getnote(codesubmenu));
                         ds.setfkitchen_id(fkitchen_id);
+                        ds.setimg(img);
                         dataList.add(ds);
 
                     }
                 }
             }
             rvView.setItemViewCacheSize(dataList.size());
-            mAdapter = new Adapter_Child(context, dataList, fp);
+            mAdapter = new Adapter_Child(getActivity(), dataList, fp);
             rvView.setAdapter(mAdapter);
         } catch (JSONException e) {
             Log.e("JSONException detail", e.getMessage());
