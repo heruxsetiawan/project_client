@@ -11,9 +11,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "API", "\"http://mrk.unitedtronik.co.id/\"")
-        buildConfigField("String", "Main_menu", "\"http://192.168.0.92/1/1_1.php\"")
-        buildConfigField("String", "Solis_order", "\"http://192.168.0.92/1/1_2.php\"")
-        buildConfigField("String", "Main_menu_2", "\"http://192.168.0.92/1/1_1.php\"")
+        buildConfigField("String", "Main_menu", "\"http://192.168.0.20/1/1_1.php\"")
+        buildConfigField("String", "Solis_order", "\"http://192.168.0.20/1/1_2.php\"")
+        buildConfigField("String", "Main_menu_2", "\"http://192.168.0.20/1/1_1.php\"")
     }
     buildTypes {
         release {

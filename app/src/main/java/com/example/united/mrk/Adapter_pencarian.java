@@ -63,7 +63,7 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
             super(v);
             tvnamasubmenu = (TextView) v.findViewById(R.id.tv_submenu);
             fkitchen_id = (TextView) v.findViewById(R.id.fkitchen_id);
-            img_submenu = (ImageView) v.findViewById(R.id.img_submenu);
+            img_submenu = (ImageView) v.findViewById(R.id.img_submenu_);
             cvMain = (CardView) v.findViewById(R.id.cv_submenu);
             txtCount = (TextView) v.findViewById(R.id.tv_qty);
             buttonInc = (RelativeLayout) v.findViewById(R.id.btn_plus);

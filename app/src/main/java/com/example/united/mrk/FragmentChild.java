@@ -25,6 +25,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,6 +61,9 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
     public static final String SUBMENU_PUTEXTRA = "submenu";
     ProgressDialog progress;
     public DataHelper myDb;
+    public static AlertDialog.Builder dialog;
+    public  LayoutInflater inflater;
+    public   View dialogView;
     public FragmentChild() {
     }
 

@@ -63,13 +63,19 @@
 
                     android:textSize="13sp"
                     android:textStyle="bold" />
-
-                <ImageView
+                <RelativeLayout
                     android:id="@+id/img_submenu"
+                    android:background="@drawable/imageview_border"
                     android:layout_width="75dp"
                     android:layout_height="60dp"
-                    android:background="@drawable/imageview_border"
-                    android:src="@drawable/menu_" />
+                    android:padding="2dp">
+                    <ImageView
+                        android:id="@+id/img_submenu_"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/menu_" />
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/Rp"

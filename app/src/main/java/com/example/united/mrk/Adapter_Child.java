@@ -2,6 +2,7 @@ package com.example.united.mrk;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -66,7 +67,7 @@ public class Adapter_Child extends RecyclerView.Adapter<Adapter_Child.ViewHolder
             super(v);
             tvnamasubmenu = (TextView) v.findViewById(R.id.tv_submenu);
             fkitchen_id = (TextView) v.findViewById(R.id.fkitchen_id);
-            img_submenu = (ImageView) v.findViewById(R.id.img_submenu);
+            img_submenu = (ImageView) v.findViewById(R.id.img_submenu_);
             cvMain = (CardView) v.findViewById(R.id.cv_submenu);
             txtCount = (TextView) v.findViewById(R.id.tv_qty);
             buttonInc = (RelativeLayout) v.findViewById(R.id.btn_plus);
@@ -110,7 +111,16 @@ public class Adapter_Child extends RecyclerView.Adapter<Adapter_Child.ViewHolder
         Picasso.with(kontek)
                 .load(ds.getImg())
                 .into(holder.img_submenu);
+        holder.img_submenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+                dialog_gambar mydialog = new dialog_gambar(kontek,ds.getImg());
+                mydialog.show();
+
+            }
+        });
         final Integer jumlah = Integer.valueOf(holder.txtCount.getText().toString());
         if(jumlah==0){
             holder.note.setVisibility(View.GONE);
