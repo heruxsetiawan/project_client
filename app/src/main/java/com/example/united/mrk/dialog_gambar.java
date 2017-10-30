@@ -2,14 +2,7 @@ package com.example.united.mrk;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-
 import com.squareup.picasso.Picasso;
 
 /**

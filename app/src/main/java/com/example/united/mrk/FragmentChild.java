@@ -195,7 +195,7 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
 
                 StringBuffer buffer = new StringBuffer();
                 while (res.moveToNext()) {
-                    buffer.append("nomor :" + res.getString(0) + "\n");
+                    //buffer.append("nomor :" + res.getString(0) + "\n");
                     buffer.append("Name :" + res.getString(2) + "\n");
                     buffer.append("Jumlah :" + res.getString(3) + "\n");
                     buffer.append("Note :" + res.getString(4) + "\n");
