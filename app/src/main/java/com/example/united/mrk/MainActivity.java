@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getIDs();
-        //12345
+        //123455678900
         String menuJson = CreateFileJson.getData(getApplicationContext(), "menu");
         if (menuJson == null) {
             fragmentParent.GetDataJsonfilter("menu", "stadion");
