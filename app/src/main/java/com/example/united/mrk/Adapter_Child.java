@@ -56,7 +56,7 @@ public class Adapter_Child extends RecyclerView.Adapter<Adapter_Child.ViewHolder
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvnamasubmenu, txtCount, editText,fkitchen_id;
-        ImageView img_submenu;
+        ImageView img_submenu,pedas,new_menu,favorit,recomended;
         RelativeLayout buttonInc, buttonDec;
         CardView cvMain;
         public EditText mEditText;
@@ -77,6 +77,10 @@ public class Adapter_Child extends RecyclerView.Adapter<Adapter_Child.ViewHolder
             note=(RelativeLayout)v.findViewById(R.id.rl_notes);
             rl1=(RelativeLayout)v.findViewById(R.id.relativeLayout1);
             rladd=(RelativeLayout)v.findViewById(R.id.relativeLayout2);
+            pedas=(ImageView) v.findViewById(R.id.pedas);
+            new_menu=(ImageView) v.findViewById(R.id.new_menu);
+            favorit=(ImageView) v.findViewById(R.id.favorit);
+            recomended=(ImageView) v.findViewById(R.id.recomend);
 
 
 
@@ -99,6 +103,10 @@ public class Adapter_Child extends RecyclerView.Adapter<Adapter_Child.ViewHolder
         final String codemenu = ds.getcodemenu();
         final String hargamenu = ds.getharga();
         final String fkitchen_id = ds.getfkitchen_id();
+        final String pedas=ds.getpedas();
+        final String new_menu=ds.getnew_menu();
+        final String recomended=ds.getrecomended();
+        final String favorit=ds.getfavorit();
         holder.tvnamasubmenu.setText(namasubmenu);
         holder.txtCount.setText(ds.getqty());
         holder.mEditText.setText(ds.getnote());
@@ -106,7 +114,18 @@ public class Adapter_Child extends RecyclerView.Adapter<Adapter_Child.ViewHolder
         holder.fkitchen_id.setText(fkitchen_id);
         holder.fkitchen_id.setVisibility(View.GONE);
 
-
+        if (pedas.equalsIgnoreCase("1")){
+            holder.pedas.setVisibility(View.VISIBLE);
+        }
+        if (new_menu.equalsIgnoreCase("1")){
+            holder.new_menu.setVisibility(View.VISIBLE);
+        }
+        if (recomended.equalsIgnoreCase("1")){
+            holder.recomended.setVisibility(View.VISIBLE);
+        }
+        if (favorit.equalsIgnoreCase("1")){
+            holder.favorit.setVisibility(View.VISIBLE);
+        }
 
         Picasso.with(kontek)
                 .load(ds.getImg())

@@ -373,6 +373,10 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
                         String hargamenu = detailProduk.getString("harga");
                         String fkitchen_id = detailProduk.getString("fkitchen_id");
                         String img = detailProduk.getString("img");
+                        String pedas=detailProduk.getString("spicy");
+                        String new_menu=detailProduk.getString("new_menu");
+                        String recomended=detailProduk.getString("recomended");
+                        String favorit=detailProduk.getString("favorit");
 
 
                         Data_Submenu ds = new Data_Submenu();
@@ -383,6 +387,10 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
                         ds.setnote(myDb.getnote(codesubmenu));
                         ds.setfkitchen_id(fkitchen_id);
                         ds.setimg(img);
+                        ds.setpedas(pedas);
+                        ds.setnew_menu(new_menu);
+                        ds.setrecomended(recomended);
+                        ds.setfavorit(favorit);
                         dataList.add(ds);
 
                     }

@@ -294,6 +294,7 @@ public class Keranjang extends AppCompatActivity implements AdapterView.OnItemSe
             dk.setharga(harga);
             dk.settotal(total);
             dk.setfkitchen_id(fkitchen_id);
+            Log.e("tes",nama_produk);
           /*  if (i == 1) {
 
                 split = "" + format;

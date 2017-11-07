@@ -31,14 +31,14 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getIDs();
-        //123555555556
+
         String menuJson = CreateFileJson.getData(getApplicationContext(), "menu");
         if (menuJson == null) {
             fragmentParent.GetDataJsonfilter("menu", "stadion");
             // fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(),"menu"));
         } else {
-            fragmentParent.GetDataJsonfilter("menu", "stadion");
-           // fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(), "menu"));
+          //  fragmentParent.GetDataJsonfilter("menu", "stadion");
+            fragmentParent.tampilfromtxt(CreateFileJson.getData(getApplicationContext(), "menu"));
         }
 
 
