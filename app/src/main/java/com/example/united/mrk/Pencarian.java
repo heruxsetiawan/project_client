@@ -46,7 +46,7 @@ public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnAct
     private static String url = BuildConfig.Main_menu;
     String id;
     private RecyclerView rvView;
-    private ArrayList<Data_Submenu> dataList = new ArrayList<>();
+    private ArrayList<Data_pencarian> dataList = new ArrayList<>();
     private ArrayList<Data_Category_menu> dataList2 = new ArrayList<>();
     private Adapter_pencarian mAdapter;
 
@@ -85,7 +85,7 @@ public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnAct
         rvView.setHasFixedSize(true);
         layoutManager = new GridLayoutManager(context, 1);
         rvView.setLayoutManager(layoutManager);
-        dataList = new ArrayList<Data_Submenu>();
+        dataList = new ArrayList<Data_pencarian>();
         myDb = new DataHelper(Pencarian.this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -123,7 +123,7 @@ public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnAct
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    final ArrayList<Data_Submenu> filteredModelList = filter(dataList, newText);
+                    final ArrayList<Data_pencarian> filteredModelList = filter(dataList, newText);
                     if (filteredModelList.size() > 0) {
                         if (newText.length() > 0) {
                             cari = false;
@@ -142,10 +142,10 @@ public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnAct
         return super.onCreateOptionsMenu(menu);
     }
 
-    private ArrayList<Data_Submenu> filter(ArrayList<Data_Submenu> models, String query) {
+    private ArrayList<Data_pencarian> filter(ArrayList<Data_pencarian> models, String query) {
         query = query.toLowerCase();
-        final ArrayList<Data_Submenu> filteredModelList = new ArrayList<>();
-        for (Data_Submenu model : models) {
+        final ArrayList<Data_pencarian> filteredModelList = new ArrayList<>();
+        for (Data_pencarian model : models) {
             final String text = model.getnamasubmenu().toLowerCase();
             if (text.contains(query)) {
                 filteredModelList.add(model);
@@ -221,14 +221,27 @@ public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnAct
                     String nama = detailProduk.getString("nama");
                     String harga = detailProduk.getString("harga");
                     String fkitchen_id = detailProduk.getString("fkitchen_id");
-                    Data_Submenu ds = new Data_Submenu();
+                    String img = detailProduk.getString("img");
+                    String pedas=detailProduk.getString("spicy");
+                    String new_menu=detailProduk.getString("new_menu");
+                    String recomended=detailProduk.getString("recomended");
+                    String favorit=detailProduk.getString("favorit");
+
+                    Data_pencarian ds = new Data_pencarian();
                     ds.setcodemenu(fpkey);
                     ds.setnamasubmenu(nama);
                     ds.setharga(harga);
-                    ds.setfkitchen_id(fkitchen_id);
                     ds.setqty(myDb.getjumlah(fpkey));
                     ds.setnote(myDb.getnote(fpkey));
+                    ds.setfkitchen_id(fkitchen_id);
+                    ds.setimg(img);
+                    ds.setpedas(pedas);
+                    ds.setnew_menu(new_menu);
+                    ds.setrecomended(recomended);
+                    ds.setfavorit(favorit);
                     dataList.add(ds);
+                    Log.e("pedas",nama);
+                    Log.e("pedas",pedas);
 
                 }
 

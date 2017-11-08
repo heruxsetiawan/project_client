@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -23,7 +25,7 @@ import java.util.TimerTask;
 
 
 public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.ViewHolder> {
-    private ArrayList<Data_Submenu> rvsubmenu;
+    private ArrayList<Data_pencarian> rvsubmenu;
     private Handler repeatUpdateHandler = new Handler();
     private boolean mAutoIncrement = false;
     private boolean mAutoDecrement = false;
@@ -37,13 +39,13 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
     String note;
 
 
-    Adapter_pencarian(Context context2, ArrayList<Data_Submenu> inputData, Pencarian fp) {
+    Adapter_pencarian(Context context2, ArrayList<Data_pencarian> inputData, Pencarian fp) {
         rvsubmenu = inputData;
         context3 = context2;
         fragmentparent = fp;
     }
 
-    void setFilter(ArrayList<Data_Submenu> menu) {
+    void setFilter(ArrayList<Data_pencarian> menu) {
         rvsubmenu = new ArrayList<>();
         rvsubmenu.addAll(menu);
         notifyDataSetChanged();
@@ -52,7 +54,7 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvnamasubmenu, txtCount, editText,fkitchen_id;
-        ImageView img_submenu;
+        ImageView img_submenu,pedas,new_menu,favorit,recomended;
         RelativeLayout buttonInc, buttonDec;
         CardView cvMain;
         public EditText mEditText;
@@ -72,6 +74,10 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
             editText = (TextView) v.findViewById(R.id.tv_harga);
             note=(RelativeLayout)v.findViewById(R.id.rl_notes);
             rladd=(RelativeLayout)v.findViewById(R.id.relativeLayout2);
+            pedas=(ImageView) v.findViewById(R.id.pedas);
+            new_menu=(ImageView) v.findViewById(R.id.new_menu);
+            favorit=(ImageView) v.findViewById(R.id.favorit);
+            recomended=(ImageView) v.findViewById(R.id.recomend);
 
 
 
@@ -89,19 +95,47 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final Data_Submenu ds = rvsubmenu.get(position);
+        final Data_pencarian ds = rvsubmenu.get(position);
         final String namasubmenu = ds.getnamasubmenu();
         final String codemenu = ds.getcodemenu();
         final String hargamenu = ds.getharga();
         final String fkitchen_id=ds.getfkitchen_id();
+        final String pedas=ds.getpedas();
+        final String new_menu=ds.getnew_menu();
+        final String recomended=ds.getrecomended();
+        final String favorit=ds.getfavorit();
         holder.fkitchen_id.setText(fkitchen_id);
         holder.tvnamasubmenu.setText(namasubmenu);
         holder.txtCount.setText(ds.getqty());
         holder.mEditText.setText(ds.getnote());
         holder.rladd.setVisibility(View.GONE);
 
+        if (pedas.equalsIgnoreCase("1")){
+            holder.pedas.setVisibility(View.VISIBLE);
+        }
+        if (new_menu.equalsIgnoreCase("1")){
+            holder.new_menu.setVisibility(View.VISIBLE);
+        }
+        if (recomended.equalsIgnoreCase("1")){
+            holder.recomended.setVisibility(View.VISIBLE);
+        }
+        if (favorit.equalsIgnoreCase("1")){
+            holder.favorit.setVisibility(View.VISIBLE);
+        }
+
+        Picasso.with(context3)
+                .load(ds.getImg())
+                .into(holder.img_submenu);
+        holder.img_submenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
+                dialog_gambar mydialog = new dialog_gambar(context3,ds.getImg());
+                mydialog.show();
+
+            }
+        });
        /* final Integer jumlah = Integer.valueOf(holder.txtCount.getText().toString());
         if(jumlah==0){
             holder.note.setVisibility(View.GONE);
@@ -242,6 +276,7 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
                     holder.rladd.setVisibility(View.GONE);
                     if (isInserted2) {
                         Log.e("SQLITE", "SUKSES");
+                        Log.e("tes pedas",pedas);
                     } else {
                         Log.e("SQLITE", "Gagal");
                     }
