@@ -109,7 +109,10 @@ public class Adapter_pencarian extends RecyclerView.Adapter<Adapter_pencarian.Vi
         holder.txtCount.setText(ds.getqty());
         holder.mEditText.setText(ds.getnote());
         holder.rladd.setVisibility(View.GONE);
-
+        holder.pedas.setVisibility(View.GONE);
+        holder.new_menu.setVisibility(View.GONE);
+        holder.recomended.setVisibility(View.GONE);
+        holder.favorit.setVisibility(View.GONE);
         if (pedas.equalsIgnoreCase("1")){
             holder.pedas.setVisibility(View.VISIBLE);
         }

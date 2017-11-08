@@ -94,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_submenu"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/Rp"
                     android:gravity="top"
                     android:hint="123456"
@@ -104,50 +104,51 @@
                     android:maxLines="1"
                     android:textSize="15dp"
                     android:textStyle="bold" />
-                <ImageView
-                    android:id="@+id/pedas"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:visibility="gone"
-                    android:background="@drawable/icon_mrk_spicy"
-                    android:layout_below="@+id/tv_harga"
+
+                <RelativeLayout
+                    android:id="@+id/label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/img_submenu"
-                    android:textSize="15dp"
-                    android:layout_marginLeft="10dp"
-                  />
-                <ImageView
-                    android:id="@+id/new_menu"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/icon_mrk_new"
-                    android:layout_below="@+id/tv_harga"
-                    android:layout_toRightOf="@+id/pedas"
-                    android:textSize="15dp"
-                    android:layout_marginLeft="10dp"
-                    android:visibility="gone"
-                  />
-                <ImageView
-                    android:id="@+id/recomend"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:visibility="gone"
-                    android:background="@drawable/icon_mrk_recomended"
-                    android:layout_below="@+id/tv_harga"
-                    android:layout_toRightOf="@+id/new_menu"
-                    android:textSize="15dp"
-                    android:layout_marginLeft="10dp"
-                    />
-                <ImageView
-                    android:id="@+id/favorit"
-                    android:layout_width="25dp"
-                    android:visibility="gone"
-                    android:layout_height="25dp"
-                    android:background="@drawable/icon_mrk_favorite"
-                    android:layout_below="@+id/tv_harga"
-                    android:layout_toRightOf="@+id/recomend"
-                    android:textSize="15dp"
-                    android:layout_marginLeft="10dp"
-                    />
+                    android:layout_below="@+id/tv_harga">
+                    <ImageView
+                        android:id="@+id/pedas"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:visibility="visible"
+                        android:background="@drawable/icon_mrk_spicy_2"
+                        android:textSize="15dp"
+                        />
+                    <ImageView
+                        android:id="@+id/new_menu"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/icon_mrk_new_2"
+                        android:layout_toRightOf="@+id/pedas"
+                        android:textSize="15dp"
+                        android:visibility="visible"
+                        />
+                    <ImageView
+                        android:id="@+id/recomend"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:visibility="visible"
+                        android:background="@drawable/icon_mrk_recomended_2"
+                        android:layout_toRightOf="@+id/new_menu"
+                        android:textSize="15dp"
+                        />
+                    <ImageView
+                        android:id="@+id/favorit"
+                        android:layout_width="20dp"
+                        android:visibility="visible"
+                        android:layout_height="20dp"
+                        android:background="@drawable/icon_mrk_favorite_2"
+                        android:layout_toRightOf="@+id/recomend"
+                        android:textSize="15dp"
+                        />
+                </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/relativeLayout2"
                     android:layout_width="50dp"

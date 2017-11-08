@@ -47,7 +47,6 @@ public class Keranjang extends AppCompatActivity implements AdapterView.OnItemSe
     Context context;
     public RelativeLayout btnorder;
     public TextView total;
-    private static String solis_tes = BuildConfig.Main_menu;
     private static String url_split = BuildConfig.Solis_order;
     ArrayList<String> data_set_meja = new ArrayList<>();
     ArrayList<String> data_set_meja_filter = new ArrayList<>();

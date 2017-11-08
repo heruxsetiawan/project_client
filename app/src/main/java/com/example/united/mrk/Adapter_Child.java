@@ -113,6 +113,10 @@ public class Adapter_Child extends RecyclerView.Adapter<Adapter_Child.ViewHolder
         holder.rladd.setVisibility(View.GONE);
         holder.fkitchen_id.setText(fkitchen_id);
         holder.fkitchen_id.setVisibility(View.GONE);
+        holder.pedas.setVisibility(View.GONE);
+        holder.new_menu.setVisibility(View.GONE);
+        holder.recomended.setVisibility(View.GONE);
+        holder.favorit.setVisibility(View.GONE);
 
         if (pedas.equalsIgnoreCase("1")){
             holder.pedas.setVisibility(View.VISIBLE);

@@ -40,8 +40,8 @@ public class FragmentParent extends Fragment {
     public ViewPagerAdapter adapter;
     int selectedTabPosition;
     //  public String url = BuildConfig.API + "main_menu_2.php";
-    private static String url2 = BuildConfig.Main_menu;
-    private static String url = BuildConfig.Main_menu_2;
+    private static String url_stadion = BuildConfig.Stadion;
+    private static String url_lokal = BuildConfig.Lokal;
     // private static String url = "http://192.168.0.86/solis/main_menu_tes_android.php";
     public TextView Rp, total;
     public DataHelper myDb;
@@ -300,14 +300,14 @@ public class FragmentParent extends Fragment {
                 data.put("operasi", params[0]);
                 data.put("cabang", params[1]);
 
-                return ruc.sendPostRequest(url2, data, "POST");
+                return ruc.sendPostRequest(url_stadion, data, "POST");
             }
         }
         a ru = new a();
         ru.execute(kata, cabang);
     }
 
-    void getserver(String kata, String cabang) {
+    void refresh_update_data(String kata, String cabang) {
         dataList.clear();
         class a extends AsyncTask<String, Void, String> {
             private RegisterUserClass ruc = new RegisterUserClass();
@@ -355,7 +355,7 @@ public class FragmentParent extends Fragment {
                 data.put("operasi", params[0]);
                 data.put("cabang", params[1]);
 
-                return ruc.sendPostRequest(url, data, "POST");
+                return ruc.sendPostRequest(url_lokal, data, "POST");
             }
         }
         a ru = new a();
@@ -406,7 +406,7 @@ public class FragmentParent extends Fragment {
                 HashMap<String, String> data = new HashMap<>();
                 data.put("operasi", params[0]);
                 data.put("cabang", params[1]);
-                return ruc.sendPostRequest(url2, data, "POST");
+                return ruc.sendPostRequest(url_stadion, data, "POST");
             }
         }
         a ru = new a();
@@ -510,7 +510,7 @@ public class FragmentParent extends Fragment {
                 data.put("operasi", params[0]);
                 data.put("cabang", params[1]);
                 pDialog2.dismiss();
-                return ruc.sendPostRequest(url, data, "POST");
+                return ruc.sendPostRequest(url_lokal, data, "POST");
             }
         }
         a ru = new a();

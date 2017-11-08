@@ -43,7 +43,7 @@ import java.util.HashMap;
 public class Pencarian extends AppCompatActivity implements MenuItemCompat.OnActionExpandListener {
     static final String ARG_PAGE = "ARG_PAGE";
     private int mPage;
-    private static String url = BuildConfig.Main_menu;
+    private static String url = BuildConfig.Stadion;
     String id;
     private RecyclerView rvView;
     private ArrayList<Data_pencarian> dataList = new ArrayList<>();

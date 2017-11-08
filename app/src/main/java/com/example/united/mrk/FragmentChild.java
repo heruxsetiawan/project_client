@@ -300,7 +300,7 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
             //letak dimana progress berjalan
             //biasanya koneksi ke server maupun proses yang membutuhkan waktu
 
-            fp.getserver("menu", "stadion");
+            fp.refresh_update_data("menu", "stadion");
 
 
             return null;
