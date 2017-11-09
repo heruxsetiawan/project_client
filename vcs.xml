@@ -10,8 +10,12 @@
           <option name="url" value="https://github.com/heruxsetiawan/project1" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/heruxsetiawan/project_client" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="E:\backup\android fix with edit" />
+    <option name="cloneParentDir" value="E:\backup\android fix with edit\project_client" />
   </component>
 </application>
