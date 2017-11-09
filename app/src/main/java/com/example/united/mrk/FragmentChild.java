@@ -221,7 +221,6 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
                 startActivity(intent);*/
 
 
-
              new Pindah_pencarian().execute();
 
 
@@ -401,6 +400,7 @@ public class FragmentChild extends Fragment implements MenuItemCompat.OnActionEx
             rvView.setAdapter(mAdapter);
         } catch (JSONException e) {
             Log.e("JSONException detail", e.getMessage());
+            Toast.makeText(getContext(), "json error "+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

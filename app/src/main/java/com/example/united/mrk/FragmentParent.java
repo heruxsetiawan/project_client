@@ -282,6 +282,7 @@ public class FragmentParent extends Fragment {
 
                     } catch (final JSONException e) {
                         Log.e("TAG", "Json pertama error : " + e.getMessage());
+                        Toast.makeText(getContext(), "json error "+e.getMessage(), Toast.LENGTH_SHORT).show();
                         //  GetDataJsonfilter("menu", "stadion");
                         // showDialog_error();
                     }
@@ -492,8 +493,10 @@ public class FragmentParent extends Fragment {
                     }
                     CreateFileJson.saveData(getActivity(), s, "menu");
                 } catch (final JSONException e) {
-                    Log.e("TAG", "Json server sebenarnya salah : " + e.getMessage());
+                    Log.e("TAG", "getserver_backup : " + e.getMessage());
+                    Toast.makeText(getContext(), "json error "+e.getMessage(), Toast.LENGTH_SHORT).show();
                     //  GetDataJsonfilter("menu", "stadion");
+
                     showDialog_error();
                 }
 
@@ -505,7 +508,7 @@ public class FragmentParent extends Fragment {
 
             @Override
             protected String doInBackground(String... params) {
-                Log.e("ket", "memproses server sebenaranya");
+                Log.e("ket", "getserver_backup");
                 HashMap<String, String> data = new HashMap<>();
                 data.put("operasi", params[0]);
                 data.put("cabang", params[1]);
