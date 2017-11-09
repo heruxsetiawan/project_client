@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#e7e7e7"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context="client.example.united.mrk_client.MainActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +20,7 @@
                     layout="@layout/layout_toolbar_tes" />
                 <fragment
                     android:id="@+id/fragmentParent"
-                    android:name="com.example.united.mrk.FragmentParent"
+                    android:name="client.example.united.mrk_client.FragmentParent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     />

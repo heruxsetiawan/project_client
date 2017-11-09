@@ -60,7 +60,7 @@
                     android:layout_alignLeft="@+id/tv_submenu"
                     android:layout_alignStart="@+id/tv_submenu"
                     android:text="fkicthen_id"
-
+                    android:visibility="gone"
                     android:textSize="13sp"
                     android:textStyle="bold" />
                 <RelativeLayout

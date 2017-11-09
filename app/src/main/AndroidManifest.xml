@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.united.mrk">
+    package="com.example.united.mrk_client">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -12,21 +12,21 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/mrk"
-        android:label="Mr.K Cafe"
+        android:label="Mr.K Cafe Client"
         android:roundIcon="@drawable/mrk"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
-        <activity android:name=".SplashScreen">
+        <activity android:name="client.example.united.mrk_client.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Keranjang"></activity>
-        <activity android:name=".Pencarian"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name="client.example.united.mrk_client.Keranjang"></activity>
+        <activity android:name="client.example.united.mrk_client.Pencarian"></activity>
+        <activity android:name="client.example.united.mrk_client.MainActivity"></activity>
     </application>
 
 
